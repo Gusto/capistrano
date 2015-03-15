@@ -71,7 +71,7 @@ namespace :deploy do
       # Sync manifest filenames across servers if our manifest has a random filename
       if shared_manifest_path =~ /manifest-.+\./
         run <<-CMD.compact
-          [ -e #{shared_manifest_path.shellescape} ] || mv -- #{shared_path.shellescape}/#{shared_assets_prefix}/manifest* #{shared_manifest_path.shellescape}
+          [ -e '#{shared_manifest_path.shellescape}' ] || mv -- #{shared_path.shellescape}/#{shared_assets_prefix}/manifest* #{shared_manifest_path.shellescape}
         CMD
       end
 
@@ -176,7 +176,7 @@ namespace :deploy do
       previous_manifest = capture("ls #{previous_release.shellescape}/assets_manifest.*").strip
       if capture("[ -e #{previous_manifest.shellescape} ] && echo true || echo false").strip != 'true'
         puts "#{previous_manifest} is missing! Cannot roll back assets. " <<
-             "Please run deploy:assets:precompile to update your assets when the rollback is finished."
+            "Please run deploy:assets:precompile to update your assets when the rollback is finished."
       else
         # If the user is rolling back a Rails 4 app to Rails 3
         if File.extname(previous_manifest) == '.yml' && File.extname(shared_manifest_path) == '.json'
