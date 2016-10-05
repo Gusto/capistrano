@@ -5,7 +5,7 @@ module Capistrano
     PATCH = 4
 
     def self.to_s
-      "#{MAJOR}.#{MINOR}.#{PATCH}"
+      "#{MAJOR}.#{MINOR}.#{PATCH}.zp.1"
     end
   end
 
